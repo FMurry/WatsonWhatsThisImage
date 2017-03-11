@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        responses.clear();
+
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
             //Bitmap image = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
             Bitmap image = (Bitmap)data.getExtras().get("data");
@@ -272,6 +272,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .images(photoFile)
                         .build();
                 VisualClassification result = visualRecognition.classify(options).execute();
+                responses.clear();
                 try {
                     if (result.getImages().size() <= 0) {
                         return "Sorry didn't quite catch that";
